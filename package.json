@@ -1,0 +1,19 @@
+{
+  "name": "chakram-joi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Roberto Soares",
+  "license": "MIT",
+  "dependencies": {
+    "joi": "^9.0.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
+}
