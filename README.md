@@ -1,6 +1,6 @@
 # Chakram-Joi
 
-This project add assertions to [Chakram](https://github.com/dareid/chakram) for checking responses schema using [Joi](https://github.com/hapijs/joi).
+[Chakram](https://github.com/dareid/chakram) assertion for checking responses using [Joi](https://github.com/hapijs/joi) schema.
 
 ## Installation
 
@@ -35,9 +35,9 @@ expect(response).to.joi(schema, { abortEarly: false });
 Default options:
 
 ```yml
-abortEarly: true,     #stops validation on the first error
-presence: 'required', #declared items must be found
-allowUnknown: true    #unknown object keys are ignored
+abortEarly: true      # stops validation on the first error
+presence: 'required'  # declared items must be found
+allowUnknown: true    # unknown object keys are ignored
 ```
 
 
