@@ -1,12 +1,15 @@
 const joi = require('joi');
 
-const joiMethod = function (respObj, schema) {
+const DEFAULT_OPTIONS = {
+  abortEarly: true,
+  presence: 'required',
+  allowUnknown: true
+};
+
+const joiMethod = function (respObj, schema, options = {}) {
   const body = respObj.response.body;
-  const result = joi.validate(body, schema, {
-    abortEarly: true,
-    presence: 'required',
-    allowUnknown: true
-  });
+  const result = joi.validate(body, schema,
+    Object.assign({}, DEFAULT_OPTIONS, options));
 
   this.assert(!result.error,
     `expected body to match Joi schema ${errorMessages(result.error)}`,

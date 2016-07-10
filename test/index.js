@@ -1,10 +1,10 @@
-const joiMethod = require('../index');
-const joi = require('joi');
-const chakram = require('chakram');
 const chai = require('chai');
+const chakram = require('chakram');
+const expect = chakram.expect;
+const joi = require('joi');
+const joiMethod = require('../index');
 const sinon = require('sinon');
 const sinonChai = require("sinon-chai");
-const expect = chakram.expect;
 
 chai.use(sinonChai);
 
@@ -61,18 +61,36 @@ describe('joiMethod', () => {
 
     beforeEach(() => {
       validate = sinon.spy(joi, 'validate');
-      expect(respObj(validObject)).to.joi(schema);
+    });
+
+    afterEach(() => {
+      validate.restore();
     });
 
     it('has about early, presence as required and allow unknown keys as default options', () => {
+      expect(respObj(validObject)).to.joi(schema);
       expect(validate).to.have.been.calledWith(
         sinon.match.any,
         sinon.match.any,
         {
           abortEarly: true,
-          presence: 'required',
-          allowUnknown: true
+          allowUnknown: true,
+          presence: 'required'
         });
     });
+
+    it('allows custom options', () => {
+      expect(respObj(validObject)).to.joi(schema, { stripUnknown: true });
+      expect(validate).to.have.been.calledWith(
+        sinon.match.any,
+        sinon.match.any,
+        {
+          abortEarly: true,
+          allowUnknown: true,
+          presence: 'required',
+          stripUnknown: true
+        });
+    });
+
   });
 });
