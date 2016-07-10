@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "chakram": "^1.4.0",
     "mocha": "^2.5.3"
   }
 }
