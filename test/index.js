@@ -92,5 +92,16 @@ describe('joiMethod', () => {
         });
     });
 
+    it('allows overriding default options', () => {
+      expect(respObj(validObject)).to.joi(schema, { abortEarly: false });
+      expect(validate).to.have.been.calledWith(
+        sinon.match.any,
+        sinon.match.any,
+        {
+          abortEarly: false,
+          allowUnknown: true,
+          presence: 'required'
+        });
+    });
   });
 });
