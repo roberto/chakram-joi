@@ -6,7 +6,12 @@
   "scripts": {
     "test": "mocha test/"
   },
-  "keywords": [],
+  "keywords": [
+    "test",
+    "chakram",
+    "joi",
+    "schema"
+  ],
   "author": "Roberto Soares",
   "license": "MIT",
   "dependencies": {
