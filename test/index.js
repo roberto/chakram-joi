@@ -14,31 +14,32 @@ describe('joiMethod', () => {
       body: obj
     }
   });
-
   const schema = joi.object().keys({
     name: joi.string()
   });
+  const validObject = {name: 'test'};
+  const invalidObject = {id: 'test'};
 
   describe('positive assertion', () => {
     it('passes when object is valid', () => {
-      expect(respObj({name: 'test'})).to.joi(schema);
+      expect(respObj(validObject)).to.joi(schema);
     });
 
     it('fails when object is invalid', () => {
       expect(() => {
-        expect(respObj({id: 'test'})).to.joi(schema);
+        expect(respObj(invalidObject)).to.joi(schema);
       }).to.throw(chai.AssertionError, /expected body to match Joi schema/);
     });
   });
 
   describe('negative assertion', () => {
     it('passes when object is invalid', () => {
-      expect(respObj({id: 'test'})).not.to.joi(schema);
+      expect(respObj(invalidObject)).not.to.joi(schema);
     });
 
     it('fails when object is valid', () => {
       expect(() => {
-        expect(respObj({name: 'test'})).not.to.joi(schema);
+        expect(respObj(validObject)).not.to.joi(schema);
       }).to.throw(chai.AssertionError, /expected body to not match Joi schema/);
     });
   });
