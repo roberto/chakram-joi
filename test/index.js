@@ -25,10 +25,18 @@ describe('joiMethod', () => {
       expect(respObj(validObject)).to.joi(schema);
     });
 
-    it('fails when object is invalid', () => {
-      expect(() => {
-        expect(respObj(invalidObject)).to.joi(schema);
-      }).to.throw(chai.AssertionError, /expected body to match Joi schema/);
+    describe('for invalid object', () => {
+      it('fails', () => {
+        expect(() => {
+          expect(respObj(invalidObject)).to.joi(schema);
+        }).to.throw(chai.AssertionError, /expected body to match Joi schema/);
+      });
+
+      it('adds error message indicating issue', () => {
+        expect(() => {
+          expect(respObj(invalidObject)).to.joi(schema);
+        }).to.throw(chai.AssertionError, /error: "id" is not allowed.\n data path: id/);
+      });
     });
   });
 
