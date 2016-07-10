@@ -2,7 +2,11 @@ const joi = require('joi');
 
 const joiMethod = function (respObj, schema) {
   const body = respObj.response.body;
-  const result = joi.validate(body, schema);
+  const result = joi.validate(body, schema, {
+    abortEarly: true,
+    presence: 'required',
+    allowUnknown: true
+  });
 
   this.assert(!result.error,
     `expected body to match Joi schema ${errorMessages(result.error)}`,

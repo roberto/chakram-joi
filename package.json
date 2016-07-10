@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "repository": "roberto/chakram-joi",
   "scripts": {
     "test": "mocha test/"
   },
@@ -15,11 +16,13 @@
   "author": "Roberto Soares",
   "license": "MIT",
   "dependencies": {
-    "joi": "^9.0.0"
+    "joi": "^9.x.x"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "chakram": "^1.4.0",
-    "mocha": "^2.5.3"
+    "mocha": "^2.5.3",
+    "sinon": "^1.17.4",
+    "sinon-chai": "^2.8.0"
   }
 }

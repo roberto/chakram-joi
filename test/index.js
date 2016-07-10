@@ -2,7 +2,11 @@ const joiMethod = require('../index');
 const joi = require('joi');
 const chakram = require('chakram');
 const chai = require('chai');
+const sinon = require('sinon');
+const sinonChai = require("sinon-chai");
 const expect = chakram.expect;
+
+chai.use(sinonChai);
 
 describe('joiMethod', () => {
   before(() => {
@@ -35,7 +39,7 @@ describe('joiMethod', () => {
       it('adds error message indicating issue', () => {
         expect(() => {
           expect(respObj(invalidObject)).to.joi(schema);
-        }).to.throw(chai.AssertionError, /error: "id" is not allowed.\n data path: id/);
+        }).to.throw(chai.AssertionError, /error: "name" is required.\n data path: name/);
       });
     });
   });
@@ -49,6 +53,26 @@ describe('joiMethod', () => {
       expect(() => {
         expect(respObj(validObject)).not.to.joi(schema);
       }).to.throw(chai.AssertionError, /expected body to not match Joi schema/);
+    });
+  });
+
+  describe('options', () => {
+    let validate;
+
+    beforeEach(() => {
+      validate = sinon.spy(joi, 'validate');
+      expect(respObj(validObject)).to.joi(schema);
+    });
+
+    it('has about early, presence as required and allow unknown keys as default options', () => {
+      expect(validate).to.have.been.calledWith(
+        sinon.match.any,
+        sinon.match.any,
+        {
+          abortEarly: true,
+          presence: 'required',
+          allowUnknown: true
+        });
     });
   });
 });
