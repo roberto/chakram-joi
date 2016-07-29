@@ -24,7 +24,7 @@ var errorMessages = function errorMessages(errors) {
   if (!errors) return;
 
   return errors.details.reduce(function (message, error) {
-    return message + '\n-----\n error: ' + error.message + '.\n data path: ' + error.path;
+    return message + '\n-----\n error: ' + error.message + '.\n schema path: ' + error.path;
   }, '');
 };
 
